@@ -9,9 +9,17 @@
 <body>
     <script>
         let surname = prompt('введите вашу фамилию');
-        while (!prompt("введите вашу фамилию"));
-        let firstname = prompt('введите ваше имя', 'Иван');
-        let patronymic = prompt('введите ваше отчество', 'Иванович');
+            while (surname==="") {
+                surname=prompt("введите вашу фамилию")
+            }
+        let firstname = prompt('введите ваше имя');
+            while (firstname==="") {
+                firstname =prompt("введите ваше имя")
+            }
+        let patronymic = prompt('введите ваше отчество');
+            while (patronymic === "") {
+                patronymic = prompt("введите ваше отчество'")
+            }
         let age = parseInt(prompt('введите ваш возраст', '25'));
         let IsMan = confirm('ваш пол мужской?');
         let gender = null;

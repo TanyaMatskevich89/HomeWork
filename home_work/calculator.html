@@ -55,7 +55,7 @@
     <div class="calcLine">
         <input type="button" value="*" onclick="getSign('*')">
         <input type="button" value="/" onclick="getSign('/')">
-        <input type="button" value="=" onclick="getResult('=')">
+        <input type="button" value="=" onclick="getResult(x,y,sign)">
     </div>
 
 
@@ -73,9 +73,15 @@
         }
       }
        
-    let res = null;
+    let sign = null;
+    function getSign(signReceived) {
+        sign=signReceived
+    }
+
        
-        function getSign(sign) {
+        function getResult(x,y,sign) {
+            
+            let res=null;
               
         switch(sign) {
             case '+':
@@ -91,11 +97,10 @@
                 res = x/y;
             break;
         }
-    }
-
-    function getResult() {
         console.log(res)
     }
+
+    
      
         
    </script>

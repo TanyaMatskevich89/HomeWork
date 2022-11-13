@@ -28,6 +28,16 @@ a {
     font-size: 20px;
     color: rgb(57, 83, 253);
     margin-left: 20px;
+    line-height: 20px;
+    display: inline-block;
+    margin-bottom: 10px;
+    text-decoration: none;
+
+}
+span {
+    font-size: 15px;
+    font-style: italic;
+    color: rgb(151, 149, 149);
 }
 
 @media all and (max-width: 767px) {

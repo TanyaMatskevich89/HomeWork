@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOWELS</title>
+</head>
+<body>
+    <input type="button" value="проверить количество гласных букв" onclick="CheckLetters()">
+    
+    
+    
+    <script>
+
+        function CheckLetters() {
+            let string = prompt('напишите что-нибудь');
+            console.log(`Количество гласных в строке: ${QuantityOfLetters(string)}`)
+        }
+
+
+        function QuantityOfLetters(string) {
+            let correct = 'аеёиоуыэюя'
+            let count = 0;
+            let lowString = string.toLowerCase();
+            let newString = lowString.split('');
+            let Vowels = newString.filter(vowels =>
+                correct.includes(vowels)
+            )
+            let finalVowels = Vowels.length;
+            return finalVowels
+        }
+
+
+
+//  2 ВАРИАНТ РЕШЕНИЯ, ЧЕРЕЗ ЦИКЛ
+
+            // function QuantityOfLetters (string) {
+            //     debugger
+            //    let count = 0;
+            //    let lowString = string.toLowerCase()
+            //    let newString = lowString.split('');
+            //    let correct = 'аеёиоуыэюя'
+            //    for (let i=0; i<newString.length; i++) {
+            //     if (correct.includes(newString[i])) {
+            //         count+=1
+            //     }
+            //     else {
+            //         continue;
+            //     }
+            //    }
+            //    return count
+            // }
+           
+</script>
+    
+</body>
+</html>

@@ -2,7 +2,8 @@ body {
     background-image: url('images/background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    width: 100%;
+    background-position: center center;
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
 }
@@ -43,10 +44,17 @@ span {
 @media all and (max-width: 767px) {
     body {
         background-color: white;
-        background-image: none;     
+        background-image: url('images/mobile_version2.png')     
     }
     header img {
         display: inline-block;
+        
+    }
+    header {
+        color: rgba(180, 148, 234, 0.849);
+    }
+    a {
+        color: rgba(180, 148, 234, 0.849);
     }
 
 }

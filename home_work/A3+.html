@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A3+</title>
+    <style>
+        input {
+            margin-top: 2%;
+            margin-left: 2%;
+            background-color: pink;
+            border-radius: 10px;
+            border-color: darkmagenta;
+            width: 300px;
+            height: 60px;
+            font-size: 20px;
+            color: darkmagenta;
+        }
+        input:hover {
+           cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    
+    <input type="button" value="Проверка Палиндрома" onclick="CheckPol()">
+
+
+    <script>
+        function CheckPol() {
+            let ask = prompt('Напишите фразу для проверки');
+            
+            if (Polyndrom(ask)===true) alert('это палиндром')
+            else alert('это не палиндром');
+        }
+   
+        function Polyndrom(str) {
+                let str1 = str.toLowerCase().replaceAll('ё', 'е');
+                let string = '';
+                let symvols = '.,! ?;:-()ьъ'
+                for (let i = 0; i < str1.length; i++) {
+                    if (symvols.includes(str1[i])) continue;
+                    string += str1[i];
+                }
+                const last = string.length - 1;
+                for (let i = 0; i < string.length / 2; i++) {
+                    if (string[i] !== string[last - i]) {
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+            
+    </script>
+    
+</body>
+</html>

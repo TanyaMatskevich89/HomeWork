@@ -31,11 +31,13 @@
         function CheckPol() {
             let ask = prompt('Напишите фразу для проверки');
             
+            
             if (Polyndrom(ask)===true) alert('это палиндром')
             else alert('это не палиндром');
         }
    
         function Polyndrom(str) {
+            
                 let str1 = str.toLowerCase().replaceAll('ё', 'е');
                 let string = '';
                 let symvols = '.,! ?;:-()ьъ'

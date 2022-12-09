@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B2+</title>
+    <style>
+        input {
+            margin-top: 2%;
+            margin-left: 2%;
+            background-color: rgb(119, 226, 90);
+            width: 300px;
+            height: 60px;
+            border-radius: 40px;
+            font-size: 25px;
+            color: rgb(36, 91, 28);
+            border-color: rgb(40, 41, 39);
+        }
+    </style>
+    
+</head>
+<body>
+    <input type="button" value="Введите фразу" onclick="reverseStr()">
+    
+    <script>
+        
+        function reverseStr() {
+            let ask = prompt('введите фразу')
+            alert(`фраза в обратном порядке: ${reverseFinal(ask)}`)
+        }
+
+        let reverseFinal =(ask) => ask.split('').reverse().join('')
+       
+    </script>
+</body>
+</html>

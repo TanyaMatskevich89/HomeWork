@@ -13,12 +13,20 @@
         input {
             margin-bottom: 20px;
             margin-top: 20px;
+            width: 150px;
+            height: 50px;
+            font-size: 20px;
+            color: rgb(115, 124, 124);
+        }
+        #app {
+            display: flex;
+            flex-direction: row;
         }
     </style>
 </head>
 <body>
 
-    <input type="button" value="Choose" onclick="ChooseCar()">
+    <input type="button" value="Choose a car" onclick="ChooseCar()">
 
     <div id="app"></div>
     
@@ -29,28 +37,32 @@
     <script>
         const cars = [
             {id: '1',
-            brand: 'bmw',
+            brand: 'BMW',
             model: '7',
-            imgUrl :'https://img1.akspic.ru/crops/3/1/6/6/2/126613/126613-sinij_cvet-chernyy-sportkar-avtomobilnoe_osveshhenie-bmw_5_series-5000x3000.jpg',
-            description: 'best of the best'
+            imgUrl :'https://avtobak.net/wp-content/uploads/2017/03/BMW_750_Series.jpg',
+            description: 'In this series, some parts of the chassis are made of aluminum, which allows for greater steering precision.',
+            // price, USD: '80000'
+
 
         },
         
             {id: '2',
-            brand: 'mercedes',
-            model: 'A',
-            imgUrl :'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaoNh1_EHWBJ9KY9m7GfzChAx6vWTx1ckD2A&usqp=CAU',
-            description: 'very good car'
+            brand: 'MERCEDES',
+            model: 'C class',
+            imgUrl :'https://w-dog.ru/wallpapers/0/15/484066813996516/2015-g-mercedes-benz-s-63-amg-kupe-as-spec-c217-mersedes-amg.jpg',
+            description: 'There is a new hood lip at the front, and a new chrome bar at the rear of the car.',
+            // price, USD: '60000'
         },
             
             {id: '3',
-            brand: 'audi',
-            model: 'C',
-            imgUrl :'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSaoNh1_EHWBJ9KY9m7GfzChAx6vWTx1ckD2A&usqp=CAU',
-            description: 'good car',
+            brand: 'AUDI',
+            model: 'R8',
+            imgUrl :'https://n-russia.ru/wp-content/uploads/8/f/8/8f8d87db886f1885956bb57cd3ef969b.jpeg',
+            description: 'In the seventh series, two-stage brake lights began to be used for all car models. ',
+            // price, USD: '90000'
         }
     ]
-        
+   
         const elcar = document.getElementById('app')
         
      function ChooseCar() {

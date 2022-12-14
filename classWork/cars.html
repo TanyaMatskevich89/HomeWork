@@ -9,30 +9,40 @@
     <style>
         body {
             margin-left: 20px;
+            background-color: cadetblue;
         }
         input {
-            margin-bottom: 20px;
+            margin-bottom: 60px;
+            border-radius: 10px;
             margin-top: 20px;
+            margin-right: 40px;
             width: 150px;
             height: 50px;
             font-size: 20px;
             color: rgb(115, 124, 124);
+            text-transform: uppercase; 
+            
         }
+
         #app {
             display: flex;
             flex-direction: row;
+            justify-content: space-around;
+            
+        }
+        .card {
+            height: 500px;
         }
     </style>
 </head>
 <body>
-
+ 
+    <input type="button" value="Sort price &#8679;" onclick=" cars.sort(comparePriceFromHigh)">
+    <input type="button" value="Sort price &#8681;" onclick="cars.sort(comparePriceFromLow)"> 
     <input type="button" value="Choose a car" onclick="ChooseCar()">
-
-    <div id="app"></div>
-    
-
    
-      </div>
+    <div id="app"></div>
+
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script>
         const cars = [
@@ -50,7 +60,7 @@
             brand: 'MERCEDES',
             model: 'C class',
             imgUrl :'https://w-dog.ru/wallpapers/0/15/484066813996516/2015-g-mercedes-benz-s-63-amg-kupe-as-spec-c217-mersedes-amg.jpg',
-            description: 'There is a new hood lip at the front, and a new chrome bar at the rear of the car.',
+            description: 'Introduced in 1993 as a replacement for the 190 (W201) range, the C-Class was the smallest model in the marqus lineup',
             // price, USD: '60000'
         },
             
@@ -58,33 +68,65 @@
             brand: 'AUDI',
             model: 'R8',
             imgUrl :'https://n-russia.ru/wp-content/uploads/8/f/8/8f8d87db886f1885956bb57cd3ef969b.jpeg',
-            description: 'In the seventh series, two-stage brake lights began to be used for all car models. ',
+            description: ' is the first generation of the R8 sports car developed and manufactured by German automobile manufacturer Audi ',
             // price, USD: '90000'
         }
     ]
-   
+        const Volkswagen = {
+            id: '4',
+            brand: 'VW',
+            model: 'Tiguan',
+            imgUrl: 'https://www.vladtime.ru/uploads/posts/2016-12/1481959652_foto2.png',
+            description: 'The Tiguan in Europe was offered worldwide in various trim levels. In the United States, trim levels included S, SE, and SEL ',
+
+        }
+        cars.push(Volkswagen)
+
+        const objBMW =  cars.findIndex((obj => obj.id == 1));
+        cars[objBMW].price = "80000";
+
+        const objMerc = cars.findIndex((obj => obj.id == 2));
+        cars[objMerc].price = "60000";
+
+        const objAudi = cars.findIndex((obj => obj.id == 3));
+        cars[objAudi].price = "90000";
+
+        const obVW = cars.findIndex((obj => obj.id == 4));
+        cars[obVW].price = "40000";
+
+       
+
+        function comparePriceFromLow (a,b) {
+            if (a.price<b.price) return -1;
+            if (a.price > b.price) return 1;
+            return 0
+        }
+        
+        function comparePriceFromHigh(a, b) {
+            if (a.price < b.price) return 1;
+            if (a.price > b.price) return -1;
+                return 0
+            }
+       
         const elcar = document.getElementById('app')
         
      function ChooseCar() {
         let result ='';
         for (let car of cars) {
             result+=`<div class="card" style="width: 18rem;">
-            <img src="${car.imgUrl}" class="card-img-top" alt="фото">
-        <div class="card-body">
-            <h5 class="card-title">${car.brand}</h5>
-             <p class="card-text">${car.description}</p>
-             <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-        </div>`
-        
-        }
-       
+                    <img src="${car.imgUrl}" class="card-img-top" alt="фото">
+                    <div class="card-body">
+                    <h5 class="card-title">${car.brand}</h5>
+                    <h5 class="card-text">${car.model}</h5>
+                    <p class="card-text">${car.description}</p>
+                    <p class="card-text">Car price: ${car.price} USD</p>
+                    <a href="#" class="btn btn-primary">More info</a>
+                    </div>
+                    </div>` 
+        }  
         elcar.innerHTML=result;
-
-
      }
-
-//      
+  
     </script>
 </body>
 </html>

@@ -37,8 +37,8 @@
 </head>
 <body>
  
-    <input type="button" value="Sort price &#8679;" onclick=" cars.sort(comparePriceFromHigh)">
-    <input type="button" value="Sort price &#8681;" onclick="cars.sort(comparePriceFromLow)"> 
+    <input type="button" value="Sort price &#8679;" onclick=" cars.sort(comparePriceFromLow)">
+    <input type="button" value="Sort price &#8681;" onclick="cars.sort(comparePriceFromHigh)"> 
     <input type="button" value="Choose a car" onclick="ChooseCar()">
    
     <div id="app"></div>
@@ -108,7 +108,7 @@
                 return 0
             }
        
-        const elcar = document.getElementById('app')
+        let elcar = document.getElementById('app')
         
      function ChooseCar() {
         let result ='';

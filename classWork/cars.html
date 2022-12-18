@@ -9,18 +9,19 @@
     <style>
         body {
             margin-left: 20px;
-            background-color: cadetblue;
+            background-color: rgb(231, 231, 231);
         }
         input {
             margin-bottom: 60px;
-            border-radius: 10px;
             margin-top: 20px;
+            border-radius: 10px;
             margin-right: 40px;
             width: 200px;
             height: 50px;
             font-size: 20px;
-            color: rgb(115, 124, 124);
+            color: rgb(88, 91, 91);
             text-transform: uppercase; 
+            background-color: rgb(205, 200, 200);
             
         }
 
@@ -33,6 +34,24 @@
         .card {
             height: 500px;
         }
+
+        div input {
+            margin-bottom: 20px;
+            width: 200px;
+            height: 30px;
+            font-size: 15px;
+            text-transform: lowercase;
+            border-radius: 0px;
+            background-color: white;
+            margin-top: 0px;
+        }
+        button{  
+            color: rgb(88, 91, 91);
+            text-transform: uppercase; 
+            background-color: rgb(205, 200, 200);
+            border-radius: 10px;
+            width: 200px
+        }
     </style>
 </head>
 <body>
@@ -41,38 +60,20 @@
     <input type="button" value="Sort price &#8681;" onclick="compareHigh()"> 
     <input type="button" value="Choose a car" onclick="ChooseCar()"><br>
 
-    
-    Please, fill the car name<input id="name" type="text" name="car brand"><br>
-    Please, fill the car model<input id="model" type="text" name="model"><br>
-    Please, fill the car url<input id="image" type="text" name="image"><br>
-    Please, fill the description<textarea name="description" id="desc" cols="10" rows="3"></textarea><br>
-    Please, fill the price<input id="price" type="text" name="price"><br>
+    <div>
+    <label>Car brand:<br><input id="name"  type="text" name="car brand"></label><br>
+    <label>Car model:<br><input id="model" type="text" name="model"></label><br>
+    <label>Car img(url):<br><input id="image"  type="text" name="image"></label><br>
+    <label>Car description:<br><textarea name="description" id="desc" cols="20" rows="3"></textarea></label><br>
+    <label>Car price, USD:<br><input id="price"  type="text" name="price"></label><br>
 
-    <input type="button" value="Add info" onclick="addCar()"><br>
+    <button type="button"  onclick="addCar()">Add info</button><br>
+    </div>
+    <div id="app"></div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     
 <script>
-    const cars = []
-        function addCar() {
-            
-    let name = document.getElementById('name').value;
-    let model = document.getElementById('model').value;
-    let image = document.getElementById('image').value;
-    let description = document.getElementById('description').value;
-    let price = document.getElementById('price').value;
-    cars.push({name,model,image, description, price})
-
-    }
-
-    
-
-
-
-   
-// //     <!-- <div id="app"></div> -->
-
-//       <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-// //     <script>
-// //         const cars = [
+    //  const cars = [
 // //             {id: '1',
 // //             brand: 'BMW',
 // //             model: '7',
@@ -122,45 +123,59 @@
 // //         cars[obVW].price = "40000"; -->
 
        
-// // <!-- 
-// //        function compareHigh() {
-// //             function comparePriceFromHigh(a, b){
-// //             if (a.price<b.price) return -1;
-// //             if (a.price>b.price) return 1;
-// //             return 0;
-// //             }
-// //             cars.sort(comparePriceFromHigh);
-// //             ChooseCar()
-// //         }
-// //         function compareLow() {
-// //             function comparePriceFromLow(a, b) {
-// //                 if (a.price < b.price) return 1;
-// //                 if (a.price > b.price) return -1;
-// //                 return 0
-// //             }
-// //              cars.sort(comparePriceFromLow);
-// //             ChooseCar()
-// //             }
+    let cars = [];
+
+        function addCar() {
+            
+            let carName = document.getElementById('name').value;
+            let carModel = document.getElementById('model').value;
+            let carImage = document.getElementById('image').value;
+            let carDescription = document.getElementById('desc').value;
+            let carPrice = document.getElementById('price').value;
+            let car ={carName, carModel, carImage, carDescription, carPrice};
+            cars.push(car)
+            
+
+        }
+
+       function compareHigh() {
+            function comparePriceFromHigh(a, b){
+            if (a.carPrice <b.carPrice) return -1;
+            if (a.carPrice >b.carPrice) return 1;
+            return 0;
+            }
+            cars.sort(comparePriceFromHigh);
+            ChooseCar()
+        }
+        function compareLow() {
+            function comparePriceFromLow(a, b) {
+                if (a.carPrice < b.carPrice) return 1;
+                if (a.carPrice > b.carPrice) return -1;
+                return 0
+            }
+             cars.sort(comparePriceFromLow);
+            ChooseCar()
+            }
        
-// //         let elcar = document.getElementById('app')
+        let elcar = document.getElementById('app')
         
-// //      function ChooseCar() {
-// //         let result ='';
-// //         for (let car of cars) {
-// //             result+=`<div class="card" style="width: 18rem;">
-// //                     <img src="${car.imgUrl}" class="card-img-top" alt="фото">
-// //                     <div class="card-body">
-// //                     <h5 class="card-title">${car.brand}</h5>
-// //                     <h5 class="card-text">${car.model}</h5>
-// //                     <p class="card-text">${car.description}</p>
-// //                     <p class="card-text">Car price: ${car.price} USD</p>
-// //                     <a href="#" class="btn btn-primary">More info</a>
-// //                     </div>
-// //                     </div>` 
-// //         }  
-// //         elcar.innerHTML=result;
-// //      }
-//    -->
+     function ChooseCar() {
+        let result ='';
+        for (let i=0; i<cars.length; i++) {
+            result+=`<div class="card" style="width: 18rem;">
+                    <img src="${cars[i].carImage}" class="card-img-top" alt="фото">
+                    <div class="card-body">
+                    <h5 class="card-title">${ cars[i].carName}</h5>
+                    <h5 class="card-text">${cars[i].carModel}</h5>
+                    <p class="card-text">${cars[i].carDescription}</p>
+                    <p class="card-text">Car price: ${cars[i].carPrice} USD</p>
+                    <a href="#" class="btn btn-primary">More info</a>
+                    </div>
+                    </div>` 
+        }  
+        elcar.innerHTML=result;
+     }
+
     </script>
 </body>
 </html>

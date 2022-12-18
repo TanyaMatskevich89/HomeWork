@@ -45,6 +45,10 @@ h2 {
     margin-left: 20px;
     text-decoration: underline;
 }
+ i.fa-solid.fa-check {
+     color: rgb(184, 181, 181);
+     font-size: 20px;
+ }
 
 @media all and (max-width: 767px) {
     body {
@@ -61,5 +65,6 @@ h2 {
     a {
         color: rgba(180, 148, 234, 0.849);
     }
+   
 
 }

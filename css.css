@@ -40,6 +40,11 @@ span {
     font-style: italic;
     color: rgb(151, 149, 149);
 }
+h2 {
+    color: rgb(57, 83, 253);
+    margin-left: 20px;
+    text-decoration: underline;
+}
 
 @media all and (max-width: 767px) {
     body {

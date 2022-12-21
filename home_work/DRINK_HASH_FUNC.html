@@ -16,9 +16,9 @@
     </div>
     <script>
         function HashStorageFunc() {
-            const storage ={};
-            let self = this;
-            self.addValue = function(key,value) {
+            const storage ={}; // создали приватный хэш
+            let self = this; //"спасаем" this
+            self.addValue = function(key,value) { 
                 storage[key] = value;
             }
             self.getValue = function(key) {
@@ -33,17 +33,20 @@
             } else return false;
             }
             self.getKeys = function() {
-                return Object.keys(storage)
+                return Object.keys(storage) // метод объектов, возвращает массив ключей
             }
         }
 
-        const drinkStorage = new HashStorageFunc();
+        const drinkStorage = new HashStorageFunc(); // создали объект класса
 
         function addInfo() {
             const name = prompt('введите название напитка');
             const alcohol = prompt('напиток алкогольный?');
             const recipe = prompt('введите рецепт приготовления напитка');
             return drinkStorage.addValue(name, {alcohol, recipe});
+           
+            
+            
         }
 
         function getInfo() {

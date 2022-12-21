@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DHC</title>
+    <link rel="stylesheet" href="css/drink.css">
+</head>
+<body>
+    <div class = 'searchbox'>
+    <input type="button" name="enter info" id="info" onclick = 'addInfo()' value="ввод информации о напитке"><br>
+    <input type="button" name="receive info" id="receive" onclick = 'getInfo()' value="получение информации о напитке"><br>
+    <input type="button" name="delete info" id="delete" onclick = 'deleteInfo()' value="удалить информации о напитке"><br>
+    <input type="button" name="list info" id="list" onclick = 'listInfo()' value="перечень всех напитков"><br>
+    </div>
+    <script>
+        class HashStorageFunc {
+            constructor() {
+            this.storage ={}; // создали публичный хэш
+            }
+            
+            addValue(key, value)  { 
+            this.storage[key] = value;
+            }
+            getValue(key)  {
+                if (key in this.storage) {
+                    return this.storage[key];
+                } else return undefined;
+            }
+            deleteValue(key) {
+                if (key in this.storage) {
+                delete this.storage[key];
+                return true;
+            } else return false;
+            }
+            getKeys() {
+                return Object.keys(this.storage) 
+            }
+        }
+
+        const drinkStorage = new HashStorageFunc(); // создали объект класса
+
+        function addInfo() {
+            const name = prompt('введите название напитка');
+            const alcohol = prompt('напиток алкогольный?');
+            const recipe = prompt('введите рецепт приготовления напитка');
+            return drinkStorage.addValue(name, {alcohol, recipe});
+           
+            
+            
+        }
+
+        function getInfo() {
+            const name = prompt('введите название напитка');
+            
+            if (drinkStorage.getValue(name) == undefined) {
+                alert(`напиток не найден`)
+                
+            } else {
+                alert(`Название напитка: ${name}\nНапиток алкогольный: ${drinkStorage.getValue(name).alcohol}\nРецепт приготовления: ${drinkStorage.getValue(name).recipe}`)
+            }
+
+        }
+
+        function deleteInfo() {
+            const name = prompt('введите название напитка');
+            const del = drinkStorage.deleteValue(name);
+            if (del) {
+                alert (`напиток удален`)
+            }
+            else {
+                alert(`напиток не найден`)
+            }
+        }
+        
+        function listInfo() {
+            alert(`Перечень всех напитков: ${drinkStorage.getKeys()}`) 
+        }
+
+    </script>
+</body>
+</html>
+
+

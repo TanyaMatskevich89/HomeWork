@@ -28,12 +28,11 @@
     </div>
     <script>
 
-        const area = document.getElementById('area');
-        const square = document.getElementById('square');
-        let x=0;
-        let y=0;
+       
+        let x=null;
+        let y=null;
 
-        window.addEventListener('keydown', (e)=> {
+        window.addEventListener('keydown', (e)=> {   // обращаемся к window
             switch(e.keyCode) {
                 case 38: 
                     y-=1; 
@@ -41,15 +40,15 @@
                 break;
                 case 39: 
                     x+=1 ;
-                    square.style.left=(x+'px');;
+                    square.style.left=(x+'px');
                 break; 
                 case 40:  
                     y+=1;
-                    square.style.top=(y+'px');;
+                    square.style.top=(y+'px');
                 break;
                 case 37: 
                     x-=1;
-                    square.style.left=(x+'px');;
+                    square.style.left=(x+'px');
                 break;
             }
         })

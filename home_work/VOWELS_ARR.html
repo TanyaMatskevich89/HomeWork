@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOWELS_ARR</title>
+</head>
+
+<body>
+
+    <input type="button" value="проверить количество гласных букв" onclick="CheckLetters()">
+
+</body>
+<script>
+    const correct = 'аеёиоуыэюя'
+
+    let CheckLetters = () => {
+        let string = prompt('напишите что-нибудь').toLowerCase().split('');
+        alert(`Количество гласных через Filter: ${CheckLettersFilter(string)}`)
+        alert(`Количество гласных через ForEach: ${CheckLettersForEach(string)}`)
+        alert(`Количество гласных через Reduce: ${CheckLettersReduce(string)}`)
+    }
+
+// Первый вариает с использованием фильтра
+    let CheckLettersFilter = string => {
+        let Vowels = string.filter(vowels =>
+        correct.includes(vowels))
+        return Vowels.length
+        }
+
+// Второй вариает с использованием forEach
+    let CheckLettersForEach = string => {
+        let count = 0;
+        let Vowels = string.forEach((vowels)=> {
+            if (correct.includes(vowels)) 
+            count ++})
+        return count;
+        }
+// Третий вариает с использованием Reduce
+
+    let CheckLettersReduce = string => {
+        let Vowels = string.reduce((previous, vowels) => {
+            if (correct.includes(vowels)) 
+            previous++;
+            return previous
+        },0) 
+        return Vowels
+        
+    }
+    
+         </script>
+

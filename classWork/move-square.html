@@ -36,19 +36,19 @@
             switch(e.keyCode) {
                 case 38: 
                     y-=1; 
-                    square.style.top=(y+'px');
+                    square.style.top=`${y}px`;
                 break;
                 case 39: 
                     x+=1 ;
-                    square.style.left=(x+'px');
+                    square.style.left=`${x}px`;
                 break; 
                 case 40:  
                     y+=1;
-                    square.style.top=(y+'px');
+                    square.style.top=`${y}px`;
                 break;
                 case 37: 
                     x-=1;
-                    square.style.left=(x+'px');
+                    square.style.left=`${x}px`;
                 break;
             }
         })

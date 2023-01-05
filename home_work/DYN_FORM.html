@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DYN_FORM</title>
+    <style>
+        [type='submit'] {
+            margin-top: 40px;
+        }
+     </style>
+</head>
+<body>
+    <div id="form"></div>
+    
+    <script>
+        const formDef1 =
+                [
+                    { label: 'Название сайта:', kind: 'longtext', name: 'sitename' },
+                    { label: 'URL сайта:', kind: 'longtext', name: 'siteurl' },
+                    { label: 'Посетителей в сутки:', kind: 'number', name: 'visitors' },
+                    { label: 'E-mail для связи:', kind: 'shorttext', name: 'email' },
+                    {
+                        label: 'Рубрика каталога:', kind: 'combo', name: 'division',
+                        variants: [{ text: 'здоровье', value: 1 }, { text: 'домашний уют', value: 2 }, { text: 'бытовая техника', value: 3 }]
+                    },
+                    {
+                        label: 'Размещение:', kind: 'radio', name: 'payment',
+                        variants: [{ text: 'бесплатное', value: 1 }, { text: 'платное', value: 2 }, { text: 'VIP', value: 3 }]
+                    },
+                    { label: 'Разрешить отзывы:', kind: 'check', name: 'votes' },
+                    { label: 'Описание сайта:', kind: 'memo', name: 'description' },
+                    { caption: 'Опубликовать', kind: 'submit' },
+                ];
+
+            const formDef2 =
+                [
+                    { label: 'Фамилия:', kind: 'longtext', name: 'lastname' },
+                    { label: 'Имя:', kind: 'longtext', name: 'firstname' },
+                    { label: 'Отчество:', kind: 'longtext', name: 'secondname' },
+                    { label: 'Возраст:', kind: 'number', name: 'age' },
+                    { caption: 'Зарегистрироваться', kind: 'submit' },
+                ];
+               
+                let name = 1
+                const createForm = formDef => {
+                    const form = document.createElement('form'); // создаем тег form
+                    // создаем данные, которые указываются в теге form
+                    form.action = 'http://fe.it-academy.by/TestForm.php'; // указываем скрипт обработчик
+
+                    form.name = `form${name++}`// чтобы в имени формы нумерация  отличалась
+                    // привязываем тег form к div
+                    const div = document.getElementById('form'); // нашли див
+                    div.appendChild(form) // привязали форм к div
+                    const line = document.createElement('hr'); // чтобы смотрелись формы отлельно, как в задании, ставим им линию разрыва
+                    form.appendChild(line)
+                    // перебираем массив
+                    
+                    formDef.forEach(element => {
+                        if (element.label) {
+                           const label = document.createElement('label') //создаем элемент label
+                           label.textContent = element.label // устанавливаем содержимое элементаm label
+                           form.appendChild(label) // привязываем lable к form
+                        }
+                        
+                        // для того, чтобы сделать код более лаконичным, выбрали switch case
+                        switch (element.kind) {
+                            case 'longtext': 
+                                const inputL = document.createElement('input');
+                                form.appendChild(inputL);
+                                inputL.type = 'text' ;
+                                inputL.name = element.name;// чтобы после отправки в методе get мы увидели значение, указываем name
+
+                            break;
+                            case 'number':
+                                 const inputN = document.createElement('input');
+                                form.appendChild(inputN);
+                                inputN.type = 'number';
+                                inputN.name = element.name;
+                            break;
+                            case 'shorttext':
+                                const inputSh = document.createElement('input');
+                                form.appendChild(inputSh);
+                                inputSh.type = 'text';
+                                inputSh.name = element.name;
+                                break;
+                            case 'combo':
+                                const select = document.createElement('select')
+                                form.appendChild(select);
+                                select.name = element.name;
+
+                                //у нас вложенный массив объектов, нужно его перебрать, чтобы содать option у тега select, выбрали метод массива forEach
+                                element.variants.forEach(variants => {
+                                    const option = document.createElement('option');
+                                    option.value = variants.value;
+                                    option.textContent = variants.text;
+                                    select.appendChild(option)
+                                })
+                            break;    
+                            case 'radio':
+                                //у нас вложенный массив объектов, нужно его перебрать сразу, выбрали метод массива forEach
+                                element.variants.forEach(variants => {
+                                    const inputR = document.createElement('input');
+                                    inputR.type = 'radio';
+                                    inputR.value = variants.value;
+                                    inputR.name = element.name
+                                    form.appendChild(inputR);
+                                    const labRadio = document.createElement('label');
+                                    labRadio.textContent =  variants.text;
+                                    form.appendChild(labRadio)
+                                })
+                            break;
+                            case 'check' :
+                                const check = document.createElement('input');
+                                check.type = 'checkbox'
+                                form.appendChild(check);
+                                check.name = element.name;
+                            break;
+                            case 'memo' :
+                                const text = document.createElement('textarea');
+                                form.appendChild(text);
+                                text.name = element.name;   
+                            break;
+                            case 'submit':
+                                const inputSub = document.createElement('input')
+                                inputSub.type = 'submit';
+                                inputSub.value = element.caption;
+                                form.appendChild(inputSub)
+                            break;
+                        }
+                    const nextString = document.createElement('br'); // каждый эдемент будет с новой строки
+                    form.appendChild(nextString);
+                  });
+                }
+            
+            
+            
+    
+            
+                
+        createForm(formDef1);
+        createForm(formDef2);                    
+                       
+
+    </script>
+</body>
+</html>

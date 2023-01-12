@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/valid_form.css">
+    <title>Valid_form</title>
+</head>
+
+<body>
+    <form action="https://fe.it-academy.by/TestForm.php" name="form1" method="get" id="js-form">
+        <div class="input-developers">
+            <label>Разработчики: <input type="text" name="developers" class="input"></label>
+        </div>
+        <div class="input-sitename">
+            <label>Название сайта: <input type="text" name="sitename" class="input"></label>
+        </div>
+        <div class="input-control">
+            <label>URL сайта: <input type="text" name="siteurl" class="input"></label>
+        </div>
+        <div class="input-control">
+            <label>Дата запуска сайта: <input type="date" name="lounchdate" class="input"></label>
+        </div>
+        <div class="input-control">
+            <label>Посетителей в сутки: <input type="number" name="visitors" class="input"></label>
+        </div>
+        <div class="input-control">
+            <label>E-mail для связи: <input type="text" name="email" class="input"></label>
+        </div>
+        <div class="input-control">
+            <label>Рубрика каталога:</label>
+            <select name="division" id="divis" class="input">
+                <option value="1">здоровье</option>
+                <option value="2">домашний уют</option>
+                <option value="3">бытовая техника</option>
+            </select>
+        </div>
+        <div id="radio">
+            <label> Размещение:
+                <input type="radio" name="payment" value="1" class="radio">бесплатное
+                <input type="radio" name="payment" value="2" class="radio">платное
+                <input type="radio" name="payment" value="3" class="radio">VIP</label>
+        </div>
+        <div class="input-control">
+            <label>Разрешить отзывы: <input type="checkbox" name="votes" id="votes"></label>
+        </div>
+        <div class="input-control">
+            <label>Описание сайта:<br> <textarea name="description" id="desc" cols="50" rows="3"
+                    class="input"></textarea></label>
+        </div>
+
+        <input type="submit" name="submit" id="send" value="Опубликовать">
+    </form>
+
+    
+    <script>
+        const form = document.forms.form1; // нашли саму форму
+        //далее находим все элементы формы
+        const inputs = document.getElementsByClassName('input') // получаю массив инпутов
+        const radio = document.querySelectorAll('input[type="radio"]'); // получила массив инпут тайп радио
+        const checkbox = document.querySelector('#votes') // получила чекбокс
+
+       for (let i = 0; i < inputs.length; i++) { // перебираем массив инпутов
+            let input = inputs[i];
+            input.addEventListener('blur', event => { // устанавливаю слушатель события на каждый элемент инпут, для того, чтобы при переходе на другое поле, высвечивалась ошибка, нужно усановить blur(потерю фокуса)
+                if (input.value === "") { // если у него значение-пустая строка, то создаю спан и пишу в нем ошибку, затем цепляю его к родительскому элементу
+                    let error = document.createElement('span');
+                    error.className = 'error' //затем создаю класс для того, чтобы удалить спан после ввода текса
+                    error.innerHTML = 'поле не заполнено!';
+                    input.parentElement.appendChild(error); // цепляю спан к родителю
+                }
+            })
+            input.onfocus = () => { //событие focus вызывается в момент фокусировки
+                if (input.parentNode.querySelector('.error')) { // если у родителя есть класс error
+                    input.parentNode.querySelector('.error').remove() // удалаю спан, предполагаю, что пользователь введет данные
+                }
+            }
+        }
+        form.addEventListener('submit', e => { // ножно отменить отправку формы, если поля не заполнены, для этого выбрала тип события submit и установила его на всю форму
+
+            let notValid = form.querySelectorAll('.error');  //собираю все error
+            for (let i = 0; i < notValid.length; i++) { // запускаю цикл
+                notValid[i].remove() // чтобы не дублировались сообщения в спане
+            }
+            let errorArray = []; // массив понадобится, чтобы сделать фокусировку на первый незаполненный элемент
+            for (let i = 0; i < inputs.length; i++) { // перебираю массив инпутов
+                if (inputs[i].value === '') { // если значение инпут - пустая строка
+                    errorArray.push(inputs[i]) // загоняю в массив, использую позже
+                    let error = document.createElement('span'); 
+                    error.innerHTML = 'поле не заполнено!'; 
+                    error.className = 'error' 
+                    inputs[i].parentElement.appendChild(error); 
+                    e.preventDefault();  // отменяем отправку формы по умолчанию
+
+                }
+            }
+            if (checkbox.checked === false) { // если чекбокс не отмечен галочкой, далее повотряем дейтсвия,, как с инпутом
+                let error = document.createElement('span');
+                error.innerHTML = 'подтвердите действие!';
+                error.className = 'error'
+                checkbox.parentElement.appendChild(error);
+                e.preventDefault()
+
+            }
+            let count = 0; // чтобы посчитать, есть ли нажатие на кнопку radio
+            // перебираем массив radio
+            for (let i = 0; i < radio.length; i++) {
+                if (radio[i].checked) {
+                    count++;
+                }
+            }
+            if (count == 0) { // если клика нет-выводим ошибку
+                let error = document.createElement('span');
+                error.innerHTML = 'выберите способ оплаты!';
+                error.className = 'error'
+                document.querySelector('#radio').appendChild(error);
+                e.preventDefault()
+            }
+            for (let b = 0; b < errorArray.length; b++) { // цикл для того, чтобы вывезти сфокусировать первый элемент, который не заполнен
+                errorArray[0].focus()
+            }
+        })
+
+
+
+
+
+    </script>
+    </body>
+</html>

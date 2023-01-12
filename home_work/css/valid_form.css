@@ -1,0 +1,21 @@
+span {
+    color: red;
+    font-size: 15px;
+    font-style: italic;
+}
+
+div {
+    margin-bottom: 8px;
+}
+
+.input-sitename input {
+    width: 40%
+}
+
+.input-developers input {
+    width: 40%
+}
+
+textarea {
+    width: 50%;
+}

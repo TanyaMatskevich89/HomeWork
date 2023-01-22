@@ -25,7 +25,7 @@
             
         }
 
-        #app {
+        #main {
             display: flex;
             flex-direction: row;
             justify-content: space-around;
@@ -69,157 +69,133 @@
 
     <button type="button"  onclick="addCar()">Add info</button><br>
     </div>
-    <div id="app"></div>
+    
+    <div id="main"></div>
+    <div id="bought">
+        <hr>
+        Корзина
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     
 <script>
-    //  const cars = [
-// //             {id: '1',
-// //             brand: 'BMW',
-// //             model: '7',
-// //             imgUrl :'https://avtobak.net/wp-content/uploads/2017/03/BMW_750_Series.jpg',
-// //             description: 'In this series, some parts of the chassis are made of aluminum, which allows for greater steering precision.',
-// //             // price, USD: '80000'
-
-
-// //         },
+     const cars = [
+            {id: 1,
+            brand: 'BMW',
+            model: '7',
+            imgUrl :'https://avtobak.net/wp-content/uploads/2017/03/BMW_750_Series.jpg',
+            description: 'In this series, some parts of the chassis are made of aluminum, which allows for greater steering precision.',
+            price: '80000'
+        },
         
-// //             {id: '2',
-// //             brand: 'MERCEDES',
-// //             model: 'C class',
-// //             imgUrl :'https://w-dog.ru/wallpapers/0/15/484066813996516/2015-g-mercedes-benz-s-63-amg-kupe-as-spec-c217-mersedes-amg.jpg',
-// //             description: 'Introduced in 1993 as a replacement for the 190 (W201) range, the C-Class was the smallest model in the marqus lineup',
-// //             // price, USD: '60000'
-// //         },
+            {id: 2,
+            brand: 'MERCEDES',
+            model: 'C class',
+            imgUrl :'https://w-dog.ru/wallpapers/0/15/484066813996516/2015-g-mercedes-benz-s-63-amg-kupe-as-spec-c217-mersedes-amg.jpg',
+            description: 'Introduced in 1993 as a replacement for the 190 (W201) range, the C-Class was the smallest model in the marqus lineup',
+            price: '60000'
+        },
             
-// //             {id: '3',
-// //             brand: 'AUDI',
-// //             model: 'R8',
-// //             imgUrl :'https://n-russia.ru/wp-content/uploads/8/f/8/8f8d87db886f1885956bb57cd3ef969b.jpeg',
-// //             description: ' is the first generation of the R8 sports car developed and manufactured by German automobile manufacturer Audi ',
-// //             // price, USD: '90000'
-// //         } -->
-// //     ]
-// //         <!-- const Volkswagen = {
-// //             id: '4',
-// //             brand: 'VW',
-// //             model: 'Tiguan',
-// //             imgUrl: 'https://www.vladtime.ru/uploads/posts/2016-12/1481959652_foto2.png',
-// //             description: 'The Tiguan in Europe was offered worldwide in various trim levels. In the United States, trim levels included S, SE, and SEL ',
-
-// //         } -->
-// //         <!-- cars.push(Volkswagen)
-
-// //         const objBMW =  cars.findIndex((obj => obj.id == 1));
-// //         cars[objBMW].price = "80000";
-
-// //         const objMerc = cars.findIndex((obj => obj.id == 2));
-// //         cars[objMerc].price = "60000";
-
-// //         const objAudi = cars.findIndex((obj => obj.id == 3));
-// //         cars[objAudi].price = "90000";
-
-// //         const obVW = cars.findIndex((obj => obj.id == 4));
-// //         cars[obVW].price = "40000"; -->
-
-       
-    let cars = [];
-
-        function addCar() {
-            
-            let carName = document.getElementById('name').value;
-            let carModel = document.getElementById('model').value;
-            let carImage = document.getElementById('image').value;
-            let carDescription = document.getElementById('desc').value;
-            let carPrice = document.getElementById('price').value;
-            let car ={carName, carModel, carImage, carDescription, carPrice};
-            cars.push(car)
-            
-
+            {id: 3,
+            brand: 'AUDI',
+            model: 'R8',
+            imgUrl :'https://n-russia.ru/wp-content/uploads/8/f/8/8f8d87db886f1885956bb57cd3ef969b.jpeg',
+            description: ' is the first generation of the R8 sports car developed and manufactured by German automobile manufacturer Audi ',
+            price: '90000',
+        },
+    
+        {
+            id: 4,
+            brand: 'VW',
+            model: 'Tiguan',
+            imgUrl: 'https://www.vladtime.ru/uploads/posts/2016-12/1481959652_foto2.png',
+            description: 'The Tiguan in Europe was offered worldwide in various trim levels. In the United States, trim levels included S, SE, and SEL ',
+            price: '70000',
+        } 
+    ]
+    let id = null;
+        function addCar() {   
+            id+=cars.length+1;
+            let brand = document.getElementById('name').value;
+            let model = document.getElementById('model').value;
+            let imgUrl = document.getElementById('image').value;
+            let description = document.getElementById('desc').value;
+            let price = document.getElementById('price').value;
+            let car ={id, brand, model, imgUrl, description, price};
+            cars.push(car)   
+            console.log(car)
         }
 
-       function compareHigh() {
-            function comparePriceFromHigh(a, b){
-            if (a.carPrice <b.carPrice) return -1;
-            if (a.carPrice >b.carPrice) return 1;
-            return 0;
-            }
-            cars.sort(comparePriceFromHigh);
-            ChooseCar()
-        }
-        function compareLow() {
-            function comparePriceFromLow(a, b) {
-                if (a.carPrice < b.carPrice) return 1;
-                if (a.carPrice > b.carPrice) return -1;
-                return 0
-            }
-             cars.sort(comparePriceFromLow);
-            ChooseCar()
-            }
-       
-        let elcar = document.getElementById('app')
-        
+        let arrayID = [] //сюда будем складывать все айдишники
+
+
+
      function ChooseCar() {
-        let result ='';
+        let result =''
+        
         for (let i=0; i<cars.length; i++) {
-            result+=`<div class="card" style="width: 18rem;">
-                    <img src="${cars[i].carImage}" class="card-img-top" alt="фото">
+            if(!arrayID.includes(cars[i].id)) {
+            result=`<div class="card" style="width: 18rem;">
+                    <img src="${cars[i].imgUrl}" class="card-img-top" alt="фото">
                     <div class="card-body">
-                    <h5 class="card-title">${ cars[i].carName}</h5>
-                    <h5 class="card-text">${cars[i].carModel}</h5>
-                    <p class="card-text">${cars[i].carDescription}</p>
-                    <p class="card-text">Car price: ${cars[i].carPrice} USD</p>
+                    <h5 class="card-brand">${ cars[i].brand}</h5>
+                    <h5 class="card-model">${cars[i].model}</h5>
+                    <p class="card-description">${cars[i].description}</p>
+                    <p class="card-price">Car price: ${cars[i].price} USD</p>
                     <a href="#" class="btn btn-primary">More info</a>
                     </div>
                     </div>` 
+            arrayID.push(cars[i].id)
+            const container = document.getElementById('main')
+            const div = document.createElement('div');
+            div.setAttribute('id', 'app');
+            div.innerHTML=result;
+            container.appendChild(div)
+        
         }  
-        // elcar.innerHTML=result;
-        const items = [
-            {
-                id: 1,
-                text: 'hello1'
-            },
-            {
-                id: 2,
-                text: 'hello2'
-            },
-            {
-                id: 3,
-                text: 'hello3'
-            },
-            {
-                id: 4,
-                text: 'hello4'
-            },
-            {
-                id: 5,
-                text: 'hello5'
-            },
-        ];
-
-        for(let i = 0; i<items.length; i++){
-            createEl(items[i]);
+    }
+}
+       
+        for(let i = 0; i<cars.length; i++){
+            createEl(cars[i]);
         }
 
         function handleClick(e){
-            console.log(e.target.dataset.id)
+            console.log(e.target.parentNode.dataset.id)
         }
 
-        function createEl(data){
-            const app = document.getElementById('app');
-            const div = document.createElement('div');
+        function createEl(car){
             const btn = document.createElement('button');
-            const p = document.createElement('p');
-            p.innerText = data.text;
-            div.appendChild(p);
-            btn.setAttribute('data-id', data.id);
+            const p = document.getElementsByClassName('card-body');
+            const basket = document.createElement('i');
+            basket.setAttribute('class', "fa-solid fa-cart-shopping");
+            basket.style.color = "#0d6efd";
+            btn.setAttribute('data-id', car.id);
             btn.onclick = handleClick;
-            div.appendChild(btn);
-            app.appendChild(div);
+            btn.appendChild(basket);
         }
+        
+            function compareHigh() {
+                function comparePriceFromHigh(a, b) {
+                    if (a.carPrice < b.carPrice) return -1;
+                    if (a.carPrice > b.carPrice) return 1;
+                    return 0;
+                }
+                cars.sort(comparePriceFromHigh);
+                ChooseCar()
+            }
+            function compareLow() {
+                function comparePriceFromLow(a, b) {
+                    if (a.carPrice < b.carPrice) return 1;
+                    if (a.carPrice > b.carPrice) return -1;
+                    return 0
+                }
+                cars.sort(comparePriceFromLow);
+                ChooseCar()
+            }
+
 
         
-     }
+     
 
     </script>
 </body>

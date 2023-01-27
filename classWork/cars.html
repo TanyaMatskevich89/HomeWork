@@ -139,7 +139,7 @@
                     <div class="card-body">
                     <h5 class="card-brand">${ cars[i].brand}</h5>
                     <h5 class="card-model">${cars[i].model}</h5>
-                    <p class="card-description">${cars[i].description}</p>
+                    <p class='car_description', class="card-description">${cars[i].description}</p>
                     <p class="card-price">Car price: ${cars[i].price} USD</p>
                     <a href="#" class="btn btn-primary">More info</a>
                     </div>
@@ -150,30 +150,35 @@
             div.setAttribute('id', 'app');
             div.innerHTML=result;
             container.appendChild(div)
-        
-        }  
-    }
-}
-       
-        for(let i = 0; i<cars.length; i++){
-            createEl(cars[i]);
-        }
+            
 
+            }
+    }
         function handleClick(e){
             console.log(e.target.parentNode.dataset.id)
         }
 
         function createEl(car){
-            const btn = document.createElement('button');
-            const p = document.getElementsByClassName('card-body');
-            const basket = document.createElement('i');
-            basket.setAttribute('class', "fa-solid fa-cart-shopping");
-            basket.style.color = "#0d6efd";
-            btn.setAttribute('data-id', car.id);
-            btn.onclick = handleClick;
-            btn.appendChild(basket);
+           
+                let p = document.getElementsByClassName('car_description')[car.id-1];
+            
+                const btn = document.createElement('button');
+                
+                const basket = document.createElement('i');
+                basket.setAttribute('class', "fa-solid fa-cart-shopping");
+                basket.style.color = "#0d6efd";
+                btn.setAttribute('data-id', car.id);
+                btn.onclick = handleClick;
+                btn.appendChild(basket)
+                p.appendChild(btn)
+            
+            ;
         }
-        
+        for(let i = 0; i<cars.length; i++){
+            createEl(cars[i]);
+            }
+}
+    
             function compareHigh() {
                 function comparePriceFromHigh(a, b) {
                     if (a.carPrice < b.carPrice) return -1;
@@ -192,6 +197,10 @@
                 cars.sort(comparePriceFromLow);
                 ChooseCar()
             }
+        
+    
+       
+       
 
 
         

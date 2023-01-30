@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cars</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <style>
         body {
             margin-left: 20px;
@@ -45,13 +46,61 @@
             background-color: white;
             margin-top: 0px;
         }
-        button{  
+        #addCar{  
             color: rgb(88, 91, 91);
             text-transform: uppercase; 
             background-color: rgb(205, 200, 200);
             border-radius: 10px;
             width: 200px
         }
+        button[data-id] {
+            background-color: aliceblue;
+            border: solid #0d6efd 1px ;
+            width: 40px
+        }
+        button {
+            margin-right: 10px;
+        }
+        .basket {
+            /* display: flex;
+            justify-content: flex-end;  */
+            margin: 0 auto;
+            width: 423px;
+            text-align: center;
+            padding: 10px;
+            top: 5px;
+            background-color: rgb(205, 200, 200);
+            border-radius: 20px;
+            border: solid rgb(88, 91, 91) 3px;
+            height: 100px;
+        }
+        .basket span{
+            color: #868b98;
+            text-align: center;
+            font-size: 18px;
+}
+
+.basket img{
+  width: 40px;
+  height: 40px;
+  
+}
+
+.basket div {
+  text-align: left;
+}
+.allPrice {
+  color: #868b98;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 10px;
+  
+}
+        
+        
+        
+
     </style>
 </head>
 <body>
@@ -60,6 +109,13 @@
     <input type="button" value="Sort price &#8681;" onclick="compareHigh()"> 
     <input type="button" value="Choose a car" onclick="ChooseCar()"><br>
 
+    <div class="addCar basket">
+        <span class="title">BUY</span>
+        <img src="../images/basket.png" alt="basket" title="basket">
+        <div class="choice"></div>
+        <div class="allPrice"></div>
+    </div>
+
     <div>
     <label>Car brand:<br><input id="name"  type="text" name="car brand"></label><br>
     <label>Car model:<br><input id="model" type="text" name="model"></label><br>
@@ -67,14 +123,12 @@
     <label>Car description:<br><textarea name="description" id="desc" cols="20" rows="3"></textarea></label><br>
     <label>Car price, USD:<br><input id="price"  type="text" name="price"></label><br>
 
-    <button type="button"  onclick="addCar()">Add info</button><br>
+    <button type="button" id="addCar"  onclick="addCar()">Add info</button><br>
     </div>
     
+    
     <div id="main"></div>
-    <div id="bought">
-        <hr>
-        Корзина
-    </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     
 <script>
@@ -84,7 +138,8 @@
             model: '7',
             imgUrl :'https://avtobak.net/wp-content/uploads/2017/03/BMW_750_Series.jpg',
             description: 'In this series, some parts of the chassis are made of aluminum, which allows for greater steering precision.',
-            price: '80000'
+            price: '80000',
+            rep: 1,
         },
         
             {id: 2,
@@ -92,7 +147,8 @@
             model: 'C class',
             imgUrl :'https://w-dog.ru/wallpapers/0/15/484066813996516/2015-g-mercedes-benz-s-63-amg-kupe-as-spec-c217-mersedes-amg.jpg',
             description: 'Introduced in 1993 as a replacement for the 190 (W201) range, the C-Class was the smallest model in the marqus lineup',
-            price: '60000'
+            price: '60000',
+            rep: 1,
         },
             
             {id: 3,
@@ -101,6 +157,7 @@
             imgUrl :'https://n-russia.ru/wp-content/uploads/8/f/8/8f8d87db886f1885956bb57cd3ef969b.jpeg',
             description: ' is the first generation of the R8 sports car developed and manufactured by German automobile manufacturer Audi ',
             price: '90000',
+            rep: 1,
         },
     
         {
@@ -110,6 +167,7 @@
             imgUrl: 'https://www.vladtime.ru/uploads/posts/2016-12/1481959652_foto2.png',
             description: 'The Tiguan in Europe was offered worldwide in various trim levels. In the United States, trim levels included S, SE, and SEL ',
             price: '70000',
+            rep: 1,
         } 
     ]
     let id = null;
@@ -129,9 +187,8 @@
 
 
 
-     function ChooseCar() {
+    function ChooseCar() {
         let result =''
-        
         for (let i=0; i<cars.length; i++) {
             if(!arrayID.includes(cars[i].id)) {
             result=`<div class="card" style="width: 18rem;">
@@ -139,7 +196,7 @@
                     <div class="card-body">
                     <h5 class="card-brand">${ cars[i].brand}</h5>
                     <h5 class="card-model">${cars[i].model}</h5>
-                    <p class='car_description', class="card-description">${cars[i].description}</p>
+                    <p class='car_description', class="card-description">${cars[i].description}<br></p>
                     <p class="card-price">Car price: ${cars[i].price} USD</p>
                     <a href="#" class="btn btn-primary">More info</a>
                     </div>
@@ -150,53 +207,127 @@
             div.setAttribute('id', 'app');
             div.innerHTML=result;
             container.appendChild(div)
-            
-
             }
-    }
-        function handleClick(e){
-            console.log(e.target.parentNode.dataset.id)
+        }
+
+      
+
+        for (let i = 0; i < cars.length; i++) {
+            createEl(cars[i]);
         }
 
         function createEl(car){
-           
                 let p = document.getElementsByClassName('car_description')[car.id-1];
-            
                 const btn = document.createElement('button');
-                
-                const basket = document.createElement('i');
-                basket.setAttribute('class', "fa-solid fa-cart-shopping");
+                const btn1=document.createElement('button')
+                const basket = document.createElement('span');
+                const basket1=document.createElement('span')        
                 basket.style.color = "#0d6efd";
+                basket1.style.color = "#0d6efd";
+                basket.innerText= '+'
+                basket1.innerText = '-'
                 btn.setAttribute('data-id', car.id);
                 btn.onclick = handleClick;
-                btn.appendChild(basket)
-                p.appendChild(btn)
-            
-            ;
+                btn1.onclick = handleClick;
+                btn1.setAttribute('data-id', car.id);
+                btn.appendChild(basket);
+                btn1.appendChild(basket1)
+                p.appendChild(btn);
+                p.appendChild(btn1)
         }
-        for(let i = 0; i<cars.length; i++){
-            createEl(cars[i]);
+    }
+
+        let arrBasket = [];
+          function handleClick(e) {
+            console.log(e.target.parentNode.dataset.id)
+            for (let i=0; i<cars.length; i++) {
+                if (cars[i].id == e.target.parentNode.dataset.id) {
+                    if(!arrBasket.includes(cars[i])) {
+                        arrBasket.push(cars[i])
+                    } else {
+
+                        for (let s = 0; s < arrBasket.length; s++) {
+                            if (arrBasket[s].id == e.target.parentNode.dataset.id) {
+                                arrBasket[s].rep++;
+                            }
+                        }
+                    }
+                }
             }
-}
+            rendomBasket()
+        }  
+          function rendomBasket() {
+                let sum = 0; //Считает сколько машин в корзине
+                let price = 0; //Считает итоговую сумму в корзине
+
+
+                // const loc = JSON.stringify(arrBasket);
+                // localStorage.setItem('arrBasket', loc);
+
+
+
+
+                if (arrBasket.length == 0) {
+                    price = 0;
+                    document.querySelector(".allPrice").textContent = `Итого: ${price} $`;
+
+                }
+
+                let divBasketDelete = document.querySelectorAll('.divBasket'); //Сложила в переменную все предыдущие карточки, если они есть, для того чтоб удалить
+                for (let r = 0; r < divBasketDelete.length; r++) { //Создала цикл,чтоб карточки не накапливались
+                    divBasketDelete[r].remove();
+                }
+
+                for (let m = 0; m < arrBasket.length; m++) {
+                    sum++;
+                    price += arrBasket[m].price * arrBasket[m].rep; //Итоговая стоимость
+                }
+                function minusCar(e) {
+                  console.log(e.target.dataset.id)
+
+                  if (arrBasket[m].rep - 1 == 0) {
+                      function fff(v) {
+                          return v.id != e.target.dataset.id;
+                      }
+                      arrBasket = arrBasket.filter(fff);
+
+                      rendomBasket();
+                      console.log(arrBasket)
+                      return;
+                  }
+
+
+                  arrBasket[m].rep--;
+                  rendomBasket()
+              }
+            }
+ 
     
-            function compareHigh() {
-                function comparePriceFromHigh(a, b) {
-                    if (a.carPrice < b.carPrice) return -1;
-                    if (a.carPrice > b.carPrice) return 1;
-                    return 0;
-                }
-                cars.sort(comparePriceFromHigh);
-                ChooseCar()
-            }
-            function compareLow() {
-                function comparePriceFromLow(a, b) {
-                    if (a.carPrice < b.carPrice) return 1;
-                    if (a.carPrice > b.carPrice) return -1;
-                    return 0
-                }
-                cars.sort(comparePriceFromLow);
-                ChooseCar()
-            }
+
+
+
+
+    function compareHigh() {
+        function comparePriceFromHigh(a, b) {
+            if (a.carPrice < b.carPrice) return -1;
+            if (a.carPrice > b.carPrice) return 1;
+            return 0;
+        }
+        cars.sort(comparePriceFromHigh);
+            ChooseCar()
+        }
+            
+    function compareLow() {
+        function comparePriceFromLow(a, b) {
+            if (a.carPrice < b.carPrice) return 1;
+            if (a.carPrice > b.carPrice) return -1;
+            return 0
+        }
+        cars.sort(comparePriceFromLow);
+            ChooseCar()
+    }
+
+    
         
     
        
@@ -207,5 +338,6 @@
      
 
     </script>
+
 </body>
 </html>
